@@ -73,6 +73,9 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code;
         console.log(errorCode);
+        if(errorCode.includes('auth/account-exists-with-different-credential')){
+          toast.error('This Account is already used by Gmail!')
+        }
       });
     },1000)
   }
