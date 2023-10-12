@@ -67,7 +67,8 @@ const Login = () => {
     setTimeout(()=>{
       signInWithPopup(auth, FbProvider)
       .then(() => {
-        console.log('okay');
+        setLoderShow(true)
+        setTimeout(()=>{navigate('/demo')}, 1000)
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -101,7 +102,7 @@ const Login = () => {
 
 
         (()=>{
-            if(email && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) && (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password))){
+            if(email && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) && /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)){
               signInWithEmailAndPassword(auth, email, password)
               .then(() => {
                   setLoderShow(true)
