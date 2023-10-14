@@ -33,6 +33,26 @@ const router = createBrowserRouter([
     path: "/demo",
     element: <Demo></Demo>,
   },
+  {
+    path: "https://chat-app-somormk.vercel.app/",
+    element: <App></App>,
+  },
+  {
+    path: "https://chat-app-somormk.vercel.app/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "https://chat-app-somormk.vercel.app/registration",
+    element: <Registration></Registration>,
+  },
+  {
+    path: "https://chat-app-somormk.vercel.app/forgot-password",
+    element: <ForgotPassword></ForgotPassword>,
+  },
+  {
+    path: "https://chat-app-somormk.vercel.app/demo",
+    element: <Demo></Demo>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
