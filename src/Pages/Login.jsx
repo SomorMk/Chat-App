@@ -8,6 +8,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import { TailSpin } from  'react-loader-spinner'
+import { useDispatch } from 'react-redux'
+import { userLoginInfo } from '../ReduxSlices/userSlice'
 
 const Login = () => {
 
@@ -15,6 +17,8 @@ const Login = () => {
   let navigate = useNavigate()
   const GooProvider = new GoogleAuthProvider();
   const FbProvider = new FacebookAuthProvider();
+
+  let dispatch = useDispatch()
 
   let [loginErr, setLoginErr] = useState('')
 
@@ -49,7 +53,9 @@ const Login = () => {
     },1000)
     setTimeout(()=>{
       signInWithPopup(auth, GooProvider)
-      .then(() => {
+      .then((user) => {
+        dispatch(userLoginInfo(user.user))
+        localStorage.setItem('userInfo', JSON.stringify(user.user))
         setLoderShow(true)
         setTimeout(()=>{navigate('/demo')}, 1000)
       }).catch((error) => {
@@ -107,7 +113,9 @@ const Login = () => {
         (()=>{
             if(email && password && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) && /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)){
               signInWithEmailAndPassword(auth, email, password)
-              .then(() => {
+              .then((user) => {
+                dispatch(userLoginInfo(user.user))
+                localStorage.setItem('userInfo', JSON.stringify(user.user))
                   setLoderShow(true)
                   setTimeout(()=>{
                     toast('Login Successfull!!');
