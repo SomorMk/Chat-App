@@ -57,7 +57,7 @@ const Login = () => {
         dispatch(userLoginInfo(user.user))
         localStorage.setItem('userInfo', JSON.stringify(user.user))
         setLoderShow(true)
-        setTimeout(()=>{navigate('/demo')}, 1000)
+        setTimeout(()=>{navigate('/home')}, 1000)
       }).catch((error) => {
         const errorCode = error.code;
         console.log(errorCode);
@@ -74,7 +74,7 @@ const Login = () => {
       signInWithPopup(auth, FbProvider)
       .then(() => {
         setLoderShow(true)
-        setTimeout(()=>{navigate('/demo')}, 1000)
+        setTimeout(()=>{navigate('/home')}, 1000)
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -118,11 +118,11 @@ const Login = () => {
                 localStorage.setItem('userInfo', JSON.stringify(user.user))
                   setLoderShow(true)
                   setTimeout(()=>{
-                    toast('Login Successfull!!');
+                    toast.success('Login Successfull!!');
                     setEmail('')
                     setPassword('')
                   }, 200)
-                  setTimeout(()=>{navigate('/demo')}, 2000)
+                  setTimeout(()=>{navigate('/home')}, 2000)
                 })
                 .catch((error) => {
                   const errorCode = error.code;
@@ -130,6 +130,9 @@ const Login = () => {
                   if(errorCode.includes('auth/invalid-login-credentials')){
                     setEmailErr('Enter Proper Email!!')
                     setPasswordErr('Enter Proper Password!!')
+                  }
+                  if(errorCode.includes('auth/network-request-failed')){
+                    toast.warning('No Network Connection!!')
                   }
               });
             } else{

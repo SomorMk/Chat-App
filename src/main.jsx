@@ -7,7 +7,7 @@ import Login from './Pages/Login.jsx';
 import Registration from './Pages/Registration.jsx';
 import firebaseConfig from './authentication/FirebaseCongin.jsx';
 import 'react-toastify/dist/ReactToastify.css';
-import Demo from './Pages/Demo.jsx';
+import Home from './Pages/Home.jsx';
 import ForgotPassword from './Pages/ForgotPassword.jsx';
 import store from './store.jsx'
 import { Provider } from 'react-redux'
@@ -30,49 +30,9 @@ const router = createBrowserRouter([
     element: <ForgotPassword></ForgotPassword>,
   },
   {
-    path: "/demo",
-    element: <Demo></Demo>,
-  },
-  {
-    path: "https://chat-app-somormk.vercel.app/",
-    element: <App></App>,
-  },
-  {
-    path: "https://chat-app-somormk.vercel.app/login",
-    element: <Login></Login>,
-  },
-  {
-    path: "https://chat-app-somormk.vercel.app/registration",
-    element: <Registration></Registration>,
-  },
-  {
-    path: "https://chat-app-somormk.vercel.app/forgot-password",
-    element: <ForgotPassword></ForgotPassword>,
-  },
-  {
-    path: "https://chat-app-somormk.vercel.app/demo",
-    element: <Demo></Demo>,
-  },
-  {
-    path: "chat-app-somormk.vercel.app/",
-    element: <App></App>,
-  },
-  {
-    path: "chat-app-somormk.vercel.app/login",
-    element: <Login></Login>,
-  },
-  {
-    path: "chat-app-somormk.vercel.app/registration",
-    element: <Registration></Registration>,
-  },
-  {
-    path: "chat-app-somormk.vercel.app/forgot-password",
-    element: <ForgotPassword></ForgotPassword>,
-  },
-  {
-    path: "chat-app-somormk.vercel.app/demo",
-    element: <Demo></Demo>,
-  },
+    path: "/home",
+    element: <Home></Home>,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
