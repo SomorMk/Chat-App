@@ -18,7 +18,8 @@ export default {
         'sec': '#11175D',
         'po': '#595D8E',
         'so': '#7F7F7F',
-        'hover': '#EA6C00'
+        'hover': '#EA6C00',
+        'b-half': 'rgba(0, 0, 0, 0.4)'
       }
     },
   },

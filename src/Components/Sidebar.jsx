@@ -6,6 +6,7 @@ import {BsBell} from 'react-icons/bs'
 import {LuSettings} from 'react-icons/lu'
 import {HiOutlineLogout} from 'react-icons/hi'
 import {RxCross1} from 'react-icons/rx'
+import {IoMdCloudUpload} from 'react-icons/io'
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -20,6 +21,7 @@ const Sidebar = () => {
     let dispatch = useDispatch()
     let [loderShow, setLoderShow] = useState(false)
     let [LogoutAlert, setLogoutAlert] = useState(false)
+    let [userImgUploadBtn, setUserImgUploadBtn] = useState(false)
     let [toolbar, setToolbar] = useState(false)
 
     let logoutClick = ()=>{
@@ -46,8 +48,15 @@ const Sidebar = () => {
     <>
         <section className='w-full h-full bg-primary rounded-2xl flex flex-col items-center justify-between py-10'>
             <div>
-                <div className='w-[100px] h-[100px] rounded-full'>
+                <div onMouseOver={()=>{setUserImgUploadBtn(true)}} onMouseOut={()=>{setUserImgUploadBtn(false)}} className='w-[100px] h-[100px] rounded-full relative'>
                     <img src={userImage} alt="User Image" className='w-full max-w-full rounded-full' />
+                    {
+                        userImgUploadBtn ?
+                        <div className='absolute top-0 left-0 w-full h-full bg-b-half rounded-full flex justify-center items-center cursor-pointer'>
+                            <IoMdCloudUpload className='text-[30px] text-w' />
+                        </div>
+                        : null
+                    }
                 </div>
             </div>
             <div className='w-full text-center'>
@@ -81,21 +90,7 @@ const Sidebar = () => {
                         <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 w-[500px] py-10 text-center bg-w rounded-xl'>
                             <RxCross1 onClick={()=>{setLogoutAlert(false)}} className='text-[25px] text-primary absolute top-5 right-5 cursor-pointer' />
                             <h3 className='text-primary text-xl font-bold font-nunito capitalize'>Are you sure want to logout?</h3>
-                            <button onClick={handelLogout} className='relative w-[300px] py-3 bg-primary mt-10 text-w text-lg font-bold font-nunito rounded-xl hover:bg-slate-400 transition-all ease-linear'> Logout
-                                {/* {
-                                    logoutLoader ?
-                                    <TailSpin
-                                    height="100"
-                                    width="100"
-                                    color="#5F35F5"
-                                    ariaLabel="tail-spin-loading"
-                                    radius="1"
-                                    wrapperStyle={{}}
-                                    visible={ logoutLoader ? true : false}
-                                    wrapperClass="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[99999]"
-                                    /> : null
-                                } */}
-                            </button>
+                            <button onClick={handelLogout} className='relative w-[300px] py-3 bg-primary mt-10 text-w text-lg font-bold font-nunito rounded-xl hover:bg-slate-400 transition-all ease-linear'>Logout</button>
                         </div>
 
                     </div>
