@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import registrationImg from '../assets/registration-bg.png'
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import { TailSpin } from  'react-loader-spinner'
 
@@ -76,14 +76,20 @@ const Registration = () => {
         setLoderShow(true)
 
           createUserWithEmailAndPassword(auth, email, password)
-          .then(() => {
-            sendEmailVerification(auth.currentUser)
-            .then(() => {
+          .then((user) => {
+            updateProfile(auth.currentUser, {
+              displayName: name,
+              photoURL: "../assets/user.png"
+            }).then(() => {
+              sendEmailVerification(auth.currentUser)
               toast('Register Successfully! Go to Gmail and Verify Your Email to Login');
               setEmail('')
               setName('')
               setPass('')
-              setTimeout(()=>{navigate('/login')}, 2000)
+              setTimeout(() => { navigate('/login') }, 2000)
+            }).catch((error) => {
+              const errorCode = error.code;
+              console.log(errorCode);
             });
           })
           .catch((error) => {

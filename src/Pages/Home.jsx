@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../Components/Sidebar';
 import SearchBar from '../Components/SearchBar';
@@ -16,9 +16,11 @@ import friend3 from '../assets/friend (3).png'
 import friend4 from '../assets/friend (4).png'
 import friend5 from '../assets/friend (5).png'
 import UserItem from '../Components/UserItem';
+import { userLoginInfo } from '../ReduxSlices/userSlice';
 
 const Demo = () => {
   const auth = getAuth();
+  const dispatch = useDispatch()
   let navigate = useNavigate()
   let [verify, setVerify] = useState(true)
 
@@ -27,6 +29,8 @@ const Demo = () => {
   onAuthStateChanged(auth, (user) => {
     if (user.emailVerified) {
       setVerify(true)
+      dispatch(userLoginInfo(user));
+      localStorage.setItem('userInfo', JSON.stringify((user)))
     }
   });
 

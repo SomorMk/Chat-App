@@ -27,9 +27,9 @@ const Sidebar = () => {
     let [logoutAlert, setLogoutAlert] = useState(false)
     let [dpUploadScreen, setDpUploadScreen] = useState(false)
     let [toolbar, setToolbar] = useState(false)
-    let [userName, setUserName] = useState('Your Name Here')
-    let [safeName, setSafeName] = useState(userName)
-    let [nameBtn, setNameBtn] = useState(false)
+    // let [userName, setUserName] = useState('Your Name Here')
+    // let [safeName, setSafeName] = useState(userName)
+    // let [nameBtn, setNameBtn] = useState(false)
     
     let [userProfileImage, setUserProfileImage] = useState(userImage)
     const [image, setImage] = useState('');
@@ -89,6 +89,9 @@ const Sidebar = () => {
                 setDpUploadScreen(false)
                 getDownloadURL(storageRef).then((downloadURL) => {
                     setUserProfileImage(downloadURL)
+                    updateProfile(auth.currentUser, {
+                        photoURL: downloadURL
+                    })
                 });
                 setImage('')
                 setCrpooerScreen(false)
@@ -96,17 +99,17 @@ const Sidebar = () => {
         }
     };
 
-    let nameSave = ()=>{
-        let ele = document.querySelector('.name_input')
-        setUserName(ele.innerText)
-        console.log(ele);
-        setNameBtn(false)
-        toast.success('User Name Updated')
-    }
+    // let nameSave = ()=>{
+    //     let ele = document.querySelector('.name_input')
+    //     setUserName(ele.innerText)
+    //     console.log(ele);
+    //     setNameBtn(false)
+    //     toast.success('User Name Updated')
+    // }
 
-    let cancleName = ()=>{
-        setNameBtn(false)
-    }
+    // let cancleName = ()=>{
+    //     setNameBtn(false)
+    // }
 
 
 
@@ -120,14 +123,14 @@ const Sidebar = () => {
                             <IoMdCloudUpload className='text-[30px] text-w' />
                         </div>
                     </div>
-                    <div className='relative'>
+                    {/* <div className='relative'>
                         <h2 onClick={()=>{setNameBtn(true)}} contentEditable='true' spellCheck='false' className='name_input text-w text-xs font-bold font-nunito text-center mt-2'>{userName}</h2>
                         {nameBtn ?
                         <div className='absolute bottom-[-30px] left-[50%] translate-x-[-50%] flex gap-2'>
                             <button onClick={nameSave} className='text-primary text-[10px] font-medium font-pop py-1 px-2 bg-w rounded-md' >Save</button>
                             <button onClick={cancleName} className='text-primary text-[10px] font-medium font-pop py-1 px-2 bg-w rounded-md' >Cancle</button>
                         </div> : null}
-                    </div>
+                    </div> */}
                     {
                         dpUploadScreen ?
                             <div className='absolute top-0 left-0 w-full h-full flex justify-center items-center z-10'>
